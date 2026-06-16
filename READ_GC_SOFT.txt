@@ -1,0 +1,36 @@
+INFO: 
+
+export WEB_HOME=/var/www/html/HOME/
+export WEB=/var/www/3dlifestrategies.org/html/
+export WEB_CONFIG=/etc/nginx/sites-available/
+
+
+WHERE ARE THE nginx multi-domain files / layout....
+site-on() {
+    sudo ln -sf /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/
+    sudo nginx -t && sudo nginx -s reload
+}
+
+# Stop a site
+site-off() {
+    sudo rm /etc/nginx/sites-enabled/$1
+    sudo nginx -t && sudo nginx -s reload
+}
+
+cp  /etc/nginx/sites-available/default nginx.conf
+
+# WEB FILES: 
+ssandrew@google3d-server1:~$ ls /var/www/html
+HOME  PROMPTS  READ.txt  index.html  index.html.ORIG  index.nginx-debian.html
+
+SETUP:
+sudo apt install whiptail
+
+TO=/var/www/html/HOME/ 
+TO=/var/www/3dlifestrategies.org/html/
+
+
+MAIN: /etc/nginx/nginx.conf
+ INCLUDES: 
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
